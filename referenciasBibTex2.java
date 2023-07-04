@@ -49,7 +49,7 @@ public class referenciasBibTex2 extends JFrame{
 	
 	public referenciasBibTex2(){
 	
-		super("Generador de referencias BibTex v1.0");
+		super("Generador de referencias BibTex v1.1");
 		
 		//cuadriculas (grid) de los campos de texto y etiquetas
 		gridCampos = new GridLayout(6, 2, 1, 1);
