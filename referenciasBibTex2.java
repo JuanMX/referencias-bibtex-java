@@ -116,12 +116,12 @@ public class referenciasBibTex2 extends JFrame{
         panelCentral.setLayout(gridCentral);
         restricciones = new GridBagConstraints();
 
-		restricciones.fill = GridBagConstraints.VERTICAL;
-		agregarComponente( new JScrollPane(referenciasText), 0, 0, 4, 3 ); //con este metodo se agrega el area de texto con un scroll al panel
+		restricciones.fill = GridBagConstraints.BOTH;
+		agregarComponente( new JScrollPane(referenciasText), 0, 0, 100, 99 ); //con este metodo se agrega el area de texto con un scroll al panel
 		
 		guardarB.setBackground(new Color( 182, 239, 226 )); //el cambio de color es para que se distinga este boton de los otros dos
         restricciones.fill = GridBagConstraints.CENTER;
-        agregarComponente( guardarB, 3, 1, 4, 1 ); //con este metodo se agrega el boton de guardar
+        agregarComponente( guardarB, 100, 50, 400, 1 ); //con este metodo se agrega el boton de guardar
 		
 		/*Por si se requiere cambiar el color de los botones para agregar libros y articulos*/
 		//masLibroB.setBackground(new Color( 246, 182, 119 ));
@@ -187,6 +187,10 @@ public class referenciasBibTex2 extends JFrame{
         masLibroB.addActionListener(manejadorBotones);
         masArticuloB.addActionListener(manejadorBotones);
         guardarB.addActionListener(manejadorBotones);
+
+		Toolkit toolkitIcono = Toolkit.getDefaultToolkit();
+		Image ventanaIcono = toolkitIcono.getImage("./Imagenes/icon.png");
+		setIconImage(ventanaIcono);
                 
 	}
 	//metodo para agregar componentes a un grid bag, se le pasa como parametro las restricciones de cada componente
@@ -204,6 +208,7 @@ public class referenciasBibTex2 extends JFrame{
 	{
 		/*Este try-catch es para poner a la interfaz grafia una "skin" de "nimbus" (hace que se vea "bonita" la interfaz).
 		Esta manera de hacerlo se encuentra en la pagina de oracle
+		https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
 		*/
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -216,14 +221,18 @@ public class referenciasBibTex2 extends JFrame{
 		catch (Exception e) {
 		// If Nimbus is not available, you can set the GUI to another look and feel.
 		}
+
+		Toolkit pantalla = Toolkit.getDefaultToolkit();
+		Dimension tamanoPantalla = pantalla.getScreenSize();
+		int anchoPantalla = tamanoPantalla.width;
 		
 		referenciasBibTex2 sistema = new referenciasBibTex2();
 		sistema.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		//sistema.setBackground(new Color(242,241,240));
-		sistema.setSize( 1350, 450 );
+		sistema.setSize( anchoPantalla, 450 );
 		sistema.setVisible( true );
-		sistema.setResizable( false );/*Esta parte desactiva la opcion de redimencionar la ventana*/
-		
+		sistema.setResizable( true );/*Esta parte desactiva la opcion de redimencionar la ventana*/
+		sistema.setLocationRelativeTo(null);
 		
 	}
     private class ManejadorBoton implements ActionListener{
@@ -312,7 +321,8 @@ public class referenciasBibTex2 extends JFrame{
 				if (seleccion == JFileChooser.APPROVE_OPTION) {
 					File fileToSave = fileChooser.getSelectedFile();
 					File f;
-            		f = new File(fileToSave.getAbsolutePath());
+					String rutaAbsolutaArchivo = fileToSave.getAbsolutePath()  + ".bib";
+            		f = new File(rutaAbsolutaArchivo);
             		
             		try{
 						FileWriter w = new FileWriter(f/*,true*/);//si se descomenta el "true" lo que hace es: si ya existe un archivo y se quiere escribir en el, escribe al final del archivo.
@@ -325,6 +335,8 @@ public class referenciasBibTex2 extends JFrame{
 						bw.close();
 						
 						referenciasText.setText("");//al final de que se guarda el archivo se vacia el contenido del area de texto
+
+						JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardo en:", JOptionPane.PLAIN_MESSAGE );
 					}catch(IOException e){};
             	
 				}
