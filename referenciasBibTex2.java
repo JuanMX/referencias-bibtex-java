@@ -225,11 +225,11 @@ public class referenciasBibTex2 extends JFrame{
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
 		Dimension tamanoPantalla = pantalla.getScreenSize();
 		int anchoPantalla = tamanoPantalla.width;
-		
+		int altoPantalla = tamanoPantalla.height / 2;
 		referenciasBibTex2 sistema = new referenciasBibTex2();
 		sistema.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		//sistema.setBackground(new Color(242,241,240));
-		sistema.setSize( anchoPantalla, 450 );
+		sistema.setSize( anchoPantalla, altoPantalla );
 		sistema.setVisible( true );
 		sistema.setResizable( true );/*Esta parte desactiva la opcion de redimencionar la ventana*/
 		sistema.setLocationRelativeTo(null);
@@ -313,7 +313,7 @@ public class referenciasBibTex2 extends JFrame{
 				
 				/*Permite ver archivos con extencion especifica*/
 				//fileChooser.setFileFilter(new FileNameExtensionFilter("Archivo de texto (*.txt)", "txt"));
-				//fileChooser.setFileFilter(new FileNameExtensionFilter("BibTeX (*.bib)","bib"));
+				fileChooser.setFileFilter(new FileNameExtensionFilter("BibTeX (*.bib)","bib"));
 				
 				int seleccion = fileChooser.showSaveDialog(null);
 				 
