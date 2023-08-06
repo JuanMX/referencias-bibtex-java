@@ -54,22 +54,24 @@ public class referenciasBibTex2 extends JFrame{
 	
 		super("Generador de referencias BibTex v1.3");
 		
-		iconoInfo = new ImageIcon(getClass().getResource("./img/document-open.png")); 
+		Toolkit toolkitIcono = Toolkit.getDefaultToolkit();
+		
+		iconoInfo = new ImageIcon(toolkitIcono.getImage("./img/document-open.png")); 
 		
 		//cuadriculas (grid) de los campos de texto y etiquetas
 		gridCampos = new GridLayout(6, 2, 1, 1);
 		gridCamposD = new GridLayout(10, 2, 1, 1);
 		
 		//los 3 botones con texto de ayuda
-		iconoLibro = new ImageIcon(getClass().getResource("./img/x-office-address-book.png")); 
+		iconoLibro = new ImageIcon(toolkitIcono.getImage("./img/x-office-address-book.png")); 
 		masLibroB = new JButton("Agregar Libro", iconoLibro);
 		masLibroB.setToolTipText("Si dejas los campos vacios agrega una plantilla sin llenar");
 		
-		iconoArticulo = new ImageIcon(getClass().getResource("./img/x-office-document.png"));
+		iconoArticulo = new ImageIcon(toolkitIcono.getImage("./img/x-office-document.png"));
 		masArticuloB = new JButton ("Agregar Articulo", iconoArticulo);
 		masArticuloB.setToolTipText("Si dejas los campos vacios agrega una plantilla sin llenar");
 		
-		iconoGuardar = new ImageIcon(getClass().getResource("./img/document-save-as.png"));
+		iconoGuardar = new ImageIcon(toolkitIcono.getImage("./img/document-save-as.png"));
 		guardarB = new JButton ("Guardar en un archivo .bib", iconoGuardar);
 		
 		//campos de texto y etiquetas para capturar datos de libros
@@ -199,7 +201,6 @@ public class referenciasBibTex2 extends JFrame{
         masArticuloB.addActionListener(manejadorBotones);
         guardarB.addActionListener(manejadorBotones);
 
-		Toolkit toolkitIcono = Toolkit.getDefaultToolkit();
 		Image ventanaIcono = toolkitIcono.getImage("./img/icon.png");
 		setIconImage(ventanaIcono);
                 
