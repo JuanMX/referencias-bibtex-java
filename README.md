@@ -27,8 +27,16 @@ Esta hecho en Java sin ninguna librería adicional por lo que se necesita el jdk
 ## Agradecimientos
 
 ![tango](https://upload.wikimedia.org/wikipedia/commons/1/12/System-software-update.svg)
+![tango2](https://upload.wikimedia.org/wikipedia/commons/4/47/Go-home-2.svg)
+![tango3](https://upload.wikimedia.org/wikipedia/commons/b/b1/Go-bottom.svg)
+![tango4](https://upload.wikimedia.org/wikipedia/commons/8/8f/Package-x-generic.svg)
+![tango5](https://upload.wikimedia.org/wikipedia/commons/2/26/X-office-address-book.svg)
+![tango6](https://upload.wikimedia.org/wikipedia/commons/1/1b/X-office-document.svg)
+![tango7](https://upload.wikimedia.org/wikipedia/commons/4/4f/Document-open.svg)
+![tango8](https://upload.wikimedia.org/wikipedia/commons/2/2f/Document-save-as.svg)
+
+
 
 Al proyecto Tango por los iconos. 
 
-https://commons.wikimedia.org/wiki/Tango_icons
-
+<a href="https://commons.wikimedia.org/wiki/Tango_icons" target="_blank">https://commons.wikimedia.org/wiki/Tango_icons</a>
