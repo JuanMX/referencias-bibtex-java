@@ -348,7 +348,7 @@ public class referenciasBibTex2 extends JFrame{
 						
 						referenciasText.setText("");//al final de que se guarda el archivo se vacia el contenido del area de texto
 
-						JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardo en:", JOptionPane.PLAIN_MESSAGE, iconoInfo );
+						JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardado en:", JOptionPane.PLAIN_MESSAGE, iconoInfo );
 					}catch(IOException e){};
             	
 				}
