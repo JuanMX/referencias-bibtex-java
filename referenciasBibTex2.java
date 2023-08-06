@@ -19,6 +19,8 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.io.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 
 public class referenciasBibTex2 extends JFrame{
@@ -46,21 +48,29 @@ public class referenciasBibTex2 extends JFrame{
 	private String titleL, authorL, publisherL, yearL, etiquetaL;
 	private String titleA, authorA, journalA, yearA, numberA, pagesA, volumeA, publisherA, etiquetaA;
 	
+	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoInfo;
 	
 	public referenciasBibTex2(){
 	
-		super("Generador de referencias BibTex v1.2");
+		super("Generador de referencias BibTex v1.3");
+		
+		iconoInfo = new ImageIcon(getClass().getResource("./img/document-open.png")); 
 		
 		//cuadriculas (grid) de los campos de texto y etiquetas
 		gridCampos = new GridLayout(6, 2, 1, 1);
 		gridCamposD = new GridLayout(10, 2, 1, 1);
 		
 		//los 3 botones con texto de ayuda
-		masLibroB = new JButton("Agregar Libro");
+		iconoLibro = new ImageIcon(getClass().getResource("./img/x-office-address-book.png")); 
+		masLibroB = new JButton("Agregar Libro", iconoLibro);
 		masLibroB.setToolTipText("Si dejas los campos vacios agrega una plantilla sin llenar");
-		masArticuloB = new JButton ("Agregar Articulo");
+		
+		iconoArticulo = new ImageIcon(getClass().getResource("./img/x-office-document.png"));
+		masArticuloB = new JButton ("Agregar Articulo", iconoArticulo);
 		masArticuloB.setToolTipText("Si dejas los campos vacios agrega una plantilla sin llenar");
-		guardarB = new JButton ("Guardar en un archivo");
+		
+		iconoGuardar = new ImageIcon(getClass().getResource("./img/document-save-as.png"));
+		guardarB = new JButton ("Guardar en un archivo .bib", iconoGuardar);
 		
 		//campos de texto y etiquetas para capturar datos de libros
 		etiquetaTextL = new JTextField( largoTextI );
@@ -117,11 +127,12 @@ public class referenciasBibTex2 extends JFrame{
         restricciones = new GridBagConstraints();
 
 		restricciones.fill = GridBagConstraints.BOTH;
-		agregarComponente( new JScrollPane(referenciasText), 0, 0, 100, 99 ); //con este metodo se agrega el area de texto con un scroll al panel
 		
-		guardarB.setBackground(new Color( 182, 239, 226 )); //el cambio de color es para que se distinga este boton de los otros dos
+		agregarComponente( new JScrollPane(referenciasText), 0, 0, 10, 9 ); //con este metodo se agrega el area de texto con un scroll al panel
+		
+		guardarB.setBackground(new Color( 177, 255, 255 )); //el cambio de color es para que se distinga este boton de los otros dos
         restricciones.fill = GridBagConstraints.CENTER;
-        agregarComponente( guardarB, 100, 50, 400, 1 ); //con este metodo se agrega el boton de guardar
+        agregarComponente( guardarB, 10, 5, 10, 1 ); //con este metodo se agrega el boton de guardar
 		
 		/*Por si se requiere cambiar el color de los botones para agregar libros y articulos*/
 		//masLibroB.setBackground(new Color( 246, 182, 119 ));
@@ -189,7 +200,7 @@ public class referenciasBibTex2 extends JFrame{
         guardarB.addActionListener(manejadorBotones);
 
 		Toolkit toolkitIcono = Toolkit.getDefaultToolkit();
-		Image ventanaIcono = toolkitIcono.getImage("./Imagenes/icon.png");
+		Image ventanaIcono = toolkitIcono.getImage("./img/icon.png");
 		setIconImage(ventanaIcono);
                 
 	}
@@ -336,7 +347,7 @@ public class referenciasBibTex2 extends JFrame{
 						
 						referenciasText.setText("");//al final de que se guarda el archivo se vacia el contenido del area de texto
 
-						JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardo en:", JOptionPane.PLAIN_MESSAGE );
+						JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardo en:", JOptionPane.PLAIN_MESSAGE, iconoInfo );
 					}catch(IOException e){};
             	
 				}
