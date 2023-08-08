@@ -12,7 +12,13 @@ Se pueden agregar las referencias bibliográficas sin llenar los campos de texto
 
 Lo anterior es útil para tener una plantilla con las referencias bibliográficas.
 
-Esta hecho en Java sin ninguna librería adicional por lo que se necesita el jdk para ejecutarlo. Si tienes el jdk instalado, estas en linux y no se ejecuta prueba cambiando los permisos de ejecución (click derecho -> propiedades).
+Esta hecho en Java sin ninguna librería adicional **pero** se necesita jdk o jre para ejecutarlo. Se pueden encontrar aqui.
+
+https://www.oracle.com/java/technologies/downloads/#java8
+
+https://www.java.com/es/download/manual.jsp
+
+Al usar el `.jar` (un ejecutable de Java) si tienes el jdk instalado, estas en Linux y no se ejecuta, prueba cambiando los permisos de ejecución con: click derecho -> propiedades.
 
 ## Notas
 
