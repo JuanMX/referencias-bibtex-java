@@ -22,6 +22,9 @@ import java.io.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class referenciasBibTex2 extends JFrame{
 	
@@ -49,6 +52,10 @@ public class referenciasBibTex2 extends JFrame{
 	private String titleA, authorA, journalA, yearA, numberA, pagesA, volumeA, publisherA, etiquetaA;
 	
 	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoInfo;
+
+	private JMenuBar barMenu;
+	private JMenu menuAyuda;
+	private JMenuItem menuItemAcercaDe;
 	
 	public referenciasBibTex2(){
 	
@@ -139,6 +146,17 @@ public class referenciasBibTex2 extends JFrame{
 		/*Por si se requiere cambiar el color de los botones para agregar libros y articulos*/
 		//masLibroB.setBackground(new Color( 246, 182, 119 ));
 		//masArticuloB.setBackground(new Color( 246, 182, 119 ));
+
+		//menu bar
+		barMenu = new JMenuBar();
+		setJMenuBar(barMenu);
+
+		menuAyuda = new JMenu("Ayuda");
+		barMenu.add(menuAyuda);
+
+		menuItemAcercaDe = new JMenuItem("Acerca de");
+		menuAyuda.add(menuItemAcercaDe);
+		
 		
 		//agregar los campos de texto y etiquetas a los paneles que corresponden	
       	p1.add(etiquetaLabelL);
