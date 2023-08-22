@@ -51,19 +51,23 @@ public class referenciasBibTex2 extends JFrame{
 	private String titleL, authorL, publisherL, yearL, etiquetaL;
 	private String titleA, authorA, journalA, yearA, numberA, pagesA, volumeA, publisherA, etiquetaA;
 	
-	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoInfo;
+	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoInfo, iconojuanmx;
 
 	private JMenuBar barMenu;
 	private JMenu menuAyuda;
 	private JMenuItem menuItemAcercaDe;
+	private static final String tituloVentanaPrincipal = "Generador de referencias BibTeX v1.3";
+	
+	Image ventanaIcono;
 	
 	public referenciasBibTex2(){
 	
-		super("Generador de referencias BibTex v1.3");
+		super(tituloVentanaPrincipal);
 		
 		Toolkit toolkitIcono = Toolkit.getDefaultToolkit();
 		
-		iconoInfo = new ImageIcon(toolkitIcono.getImage("./img/document-open.png")); 
+		iconoInfo = new ImageIcon(toolkitIcono.getImage("./img/document-open.png"));
+		iconojuanmx = new ImageIcon(toolkitIcono.getImage("./img/icon.png"));
 		
 		//cuadriculas (grid) de los campos de texto y etiquetas
 		gridCampos = new GridLayout(6, 2, 1, 1);
@@ -155,6 +159,7 @@ public class referenciasBibTex2 extends JFrame{
 		barMenu.add(menuAyuda);
 
 		menuItemAcercaDe = new JMenuItem("Acerca de");
+		
 		menuAyuda.add(menuItemAcercaDe);
 		
 		
@@ -218,8 +223,9 @@ public class referenciasBibTex2 extends JFrame{
         masLibroB.addActionListener(manejadorBotones);
         masArticuloB.addActionListener(manejadorBotones);
         guardarB.addActionListener(manejadorBotones);
+		menuItemAcercaDe.addActionListener(manejadorBotones);
 
-		Image ventanaIcono = toolkitIcono.getImage("./img/icon.png");
+		ventanaIcono= toolkitIcono.getImage("./img/icon.png");
 		setIconImage(ventanaIcono);
                 
 	}
@@ -371,7 +377,9 @@ public class referenciasBibTex2 extends JFrame{
             	
 				}
             }
-                
+			else if (evento.getSource() == menuItemAcercaDe){
+				JOptionPane.showMessageDialog( null, "Hecho por github.com/juanmx \n Bajo la Licencia: \n GNU General Public License v2.0 \n\n El codigo fuente y su jar ejecutable tuvo que ser obtenido de \n https://github.com/JuanMX/referencias-bibtex-java \n\n Agradecimientos al Proyecto Tango por los iconos \n https://commons.wikimedia.org/wiki/Tango_icons", "Acerca del " + tituloVentanaPrincipal, JOptionPane.PLAIN_MESSAGE, iconojuanmx );
+			}
         }
     }
 }
