@@ -1,6 +1,6 @@
 # Generador de referencias BibTeX en Java
 
-![demo](./Imagenes/Generador_referencias_BibTex_v1-3.png)
+![demo](./Imagenes/Generador_referencias_BibTex_v1-3-2.png)
 
 ![demojfilechooser](./Imagenes/jfilechooser_v1-3.png)
 
@@ -11,6 +11,8 @@ Genera referencias de libros y artículos.
 Se pueden agregar las referencias bibliográficas sin llenar los campos de texto solamente haciendo click en los botones de *Agregar Libro* o *Agregar Articulo*.
 
 Lo anterior es útil para tener una plantilla con las referencias bibliográficas.
+
+## Requerimientos
 
 Esta hecho en Java sin ninguna librería adicional **pero** se necesita jdk o jre para ejecutarlo. Se pueden encontrar aqui.
 
