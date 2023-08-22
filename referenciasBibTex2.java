@@ -378,7 +378,7 @@ public class referenciasBibTex2 extends JFrame{
 				}
             }
 			else if (evento.getSource() == menuItemAcercaDe){
-				JOptionPane.showMessageDialog( null, "Hecho por github.com/juanmx \n Bajo la Licencia: \n GNU General Public License v2.0 \n\n El codigo fuente y su jar ejecutable tuvo que ser obtenido de \n https://github.com/JuanMX/referencias-bibtex-java \n\n Agradecimientos al Proyecto Tango por los iconos \n https://commons.wikimedia.org/wiki/Tango_icons", "Acerca del " + tituloVentanaPrincipal, JOptionPane.PLAIN_MESSAGE, iconojuanmx );
+				JOptionPane.showMessageDialog( null, "Hecho por github.com/juanmx \n Bajo la Licencia: \n GNU General Public License v2.0 \n\n El codigo fuente y su jar ejecutable tuvieron que ser obtenidos de \n https://github.com/JuanMX/referencias-bibtex-java \n\n Agradecimientos al Proyecto Tango por los iconos \n https://commons.wikimedia.org/wiki/Tango_icons", "Acerca del " + tituloVentanaPrincipal, JOptionPane.PLAIN_MESSAGE, iconojuanmx );
 			}
         }
     }
