@@ -26,6 +26,15 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import javax.swing.JRadioButtonMenuItem;
+import java.util.ArrayList;
+import javax.swing.ButtonGroup;
+
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class referenciasBibTex2 extends JFrame{
 	
 	private int largoTextI = 18, largoTextD = 19;
@@ -51,16 +60,21 @@ public class referenciasBibTex2 extends JFrame{
 	private String titleL, authorL, publisherL, yearL, etiquetaL;
 	private String titleA, authorA, journalA, yearA, numberA, pagesA, volumeA, publisherA, etiquetaA;
 	
-	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoInfo, iconojuanmx;
+	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoInfo, iconoInformation, iconojuanmx;
 
 	private JMenuBar barMenu;
 	private JMenu menuAyuda;
 	private JMenuItem menuItemAcercaDe;
-	private static final String tituloVentanaPrincipal = "Generador de referencias BibTeX v1.3";
+
+	private JMenu menuLookAndFeel;
+	private JRadioButtonMenuItem lookAndFeels[];
+	private ButtonGroup lookAndFeelsButtonGroup;
+
+	private static final String tituloVentanaPrincipal = "Generador de referencias BibTeX v1.4";
 	
 	Image ventanaIcono;
 	
-	public referenciasBibTex2(){
+	public referenciasBibTex2(String configLookAndFeel){
 	
 		super(tituloVentanaPrincipal);
 		
@@ -68,6 +82,7 @@ public class referenciasBibTex2 extends JFrame{
 		
 		iconoInfo = new ImageIcon(toolkitIcono.getImage("./img/document-open.png"));
 		iconojuanmx = new ImageIcon(toolkitIcono.getImage("./img/icon.png"));
+		iconoInformation = new ImageIcon(toolkitIcono.getImage("./img/dialog-information.png"));
 		
 		//cuadriculas (grid) de los campos de texto y etiquetas
 		gridCampos = new GridLayout(6, 2, 1, 1);
@@ -155,14 +170,43 @@ public class referenciasBibTex2 extends JFrame{
 		barMenu = new JMenuBar();
 		setJMenuBar(barMenu);
 
+
+		menuLookAndFeel = new JMenu("Look and feel");
+		barMenu.add(menuLookAndFeel);
+
+		// INICIO Obtiene look and feels y los guarda en un Array
+		// Inicializa las listas dinamicas de look and feel
+
+		ArrayList<String> lookAndFeelNames = new ArrayList<String>();
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            lookAndFeelNames.add(info.getName());
+		}
+		
+		lookAndFeels = new JRadioButtonMenuItem[lookAndFeelNames.size()];
+		lookAndFeelsButtonGroup = new ButtonGroup();
+		
+		int intSelectedLookAndFeel = 0;
+		// FIN  Obtiene look and feels y los guarda en un Array
+
+		ManejadorLookAndFeelMenuBar managerElement = new ManejadorLookAndFeelMenuBar();
+
+		for (int i = 0; i < lookAndFeelNames.size(); i++) {
+			lookAndFeels[i] = new JRadioButtonMenuItem(lookAndFeelNames.get(i));
+			menuLookAndFeel.add(lookAndFeels[i]);
+			lookAndFeelsButtonGroup.add(lookAndFeels[i]);
+			lookAndFeels[i].addActionListener(managerElement);
+			
+			if(configLookAndFeel.equals(lookAndFeelNames.get(i))) {
+				intSelectedLookAndFeel = i;
+			}
+		}
+		lookAndFeels[intSelectedLookAndFeel].setSelected(true);
+		
 		menuAyuda = new JMenu("Ayuda");
 		barMenu.add(menuAyuda);
-
 		menuItemAcercaDe = new JMenuItem("Acerca de");
-		
 		menuAyuda.add(menuItemAcercaDe);
-		
-		
+
 		//agregar los campos de texto y etiquetas a los paneles que corresponden	
       	p1.add(etiquetaLabelL);
       	p1.add(etiquetaTextL);
@@ -242,27 +286,36 @@ public class referenciasBibTex2 extends JFrame{
 
 	public static void main( String args[] )
 	{
-		/*Este try-catch es para poner a la interfaz grafia una "skin" de "nimbus" (hace que se vea "bonita" la interfaz).
-		Esta manera de hacerlo se encuentra en la pagina de oracle
-		https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
-		*/
+		String configLookAndFeel="";
+		
+		Properties prop = new Properties();
+		String CONFIG_FILE = "CONFIG.config";
+		try {
+			prop.load(new FileInputStream(CONFIG_FILE));
+			configLookAndFeel = prop.getProperty("lookAndFeel");
+			
+		}catch(IOException e) {
+			JOptionPane.showMessageDialog( null, "Algo salio mal al leer el archivo de configuracion", "!", JOptionPane.ERROR_MESSAGE );
+			
+			e.printStackTrace();
+		}
+		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-				    UIManager.setLookAndFeel(info.getClassName());
-				    break;
+				if (configLookAndFeel.equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
 				}
 			}
 		} 
 		catch (Exception e) {
-		// If Nimbus is not available, you can set the GUI to another look and feel.
 		}
 
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
 		Dimension tamanoPantalla = pantalla.getScreenSize();
 		int anchoPantalla = tamanoPantalla.width;
 		int altoPantalla = tamanoPantalla.height / 2;
-		referenciasBibTex2 sistema = new referenciasBibTex2();
+		referenciasBibTex2 sistema = new referenciasBibTex2(configLookAndFeel);
 		sistema.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		//sistema.setBackground(new Color(242,241,240));
 		sistema.setSize( anchoPantalla, altoPantalla );
@@ -382,4 +435,84 @@ public class referenciasBibTex2 extends JFrame{
 			}
         }
     }
+
+	private class ManejadorLookAndFeelMenuBar extends JFrame implements ActionListener {
+		
+		public void actionPerformed(ActionEvent event) {
+			
+			String lookAndFeelSelected = "";
+			
+			for(int i = 0; i < lookAndFeels.length; i++) {
+				
+				if(event.getSource() == lookAndFeels[i]) {
+					
+					try {
+						
+						for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+							
+							if (lookAndFeels[i].getText().equals(info.getName())) {
+								
+								lookAndFeelSelected = info.getName();
+								
+								ArchivoDeConfiguracion config = new ArchivoDeConfiguracion();
+								
+								config.setConfig("lookAndFeel", lookAndFeelSelected);
+								
+								System.out.println("Look and feel - menu bar: " + lookAndFeelSelected);
+								
+								//JOptionPane.showMessageDialog( null, "El look and feel " + lookAndFeelSelected + " se mostrara la siguiente vez que inicie el programa", "El tema no se pudo poner en tiempo de ejecucion :(", JOptionPane.WARNING_MESSAGE );
+								
+								JOptionPane.showMessageDialog( null, "El look and feel " + lookAndFeelSelected + " se mostrara la siguiente vez que inicie el programa", "El tema no se pudo poner en tiempo de ejecucion :(", JOptionPane.PLAIN_MESSAGE, iconoInformation );
+								break;
+							}
+						}
+					} 
+					catch (Exception e) {
+						
+						JOptionPane.showMessageDialog( null, "Algo salio mal con el look and feel" + lookAndFeelSelected, "!", JOptionPane.ERROR_MESSAGE );
+					}
+				}
+			}
+		}
+	}
+
+	private class ArchivoDeConfiguracion {
+	
+		private Properties prop = new Properties();
+		private final String CONFIG_FILE = "CONFIG.config";
+		
+		public void setConfig(String key, String value) {
+			
+			try{
+				
+				prop.setProperty(key, value);
+				prop.store(new FileOutputStream(CONFIG_FILE), null);
+				System.out.println("Set config " + key + " " + value + " " + CONFIG_FILE);
+				
+			}catch(IOException e){
+				JOptionPane.showMessageDialog( null, "Algo salio mal al guardar los cambios", "!", JOptionPane.ERROR_MESSAGE );
+				e.printStackTrace();
+			}
+			
+		}
+		
+		public String getConfig(String key) {
+			
+			String value = "";
+			
+			try {
+				prop.load(new FileInputStream(CONFIG_FILE));
+				value = prop.getProperty(key);
+				
+			}catch(IOException e) {
+				JOptionPane.showMessageDialog( null, "Algo salio mal al leer el archivo de configuracion", "!", JOptionPane.ERROR_MESSAGE );
+				
+				e.printStackTrace();
+			}finally {
+				System.out.println("Get config " + key + " " + value + " " + CONFIG_FILE);
+			}
+			
+			return value;
+		}
+	}
 }

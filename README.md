@@ -1,16 +1,30 @@
 # Generador de referencias BibTeX en Java
 
-![demo](./Imagenes/Generador_referencias_BibTex_v1-3-2.png)
+![Generador de referencias BibTeX en Java](./Imagenes/Generador_referencias_BibTex_v1-4.png)
 
-![demojfilechooser](./Imagenes/jfilechooser_v1-3.png)
+![jfilechooser](./Imagenes/jfilechooser_v1-3.png)
 
-![demojoptionpane](./Imagenes/joptionpane_v1-3.png)
+![joptionpane](./Imagenes/joptionpane_v1-3.png)
 
 Genera referencias de libros y artículos. 
 
-Se pueden agregar las referencias bibliográficas sin llenar los campos de texto solamente haciendo click en los botones de *Agregar Libro* o *Agregar Articulo*.
+Se pueden agregar las referencias bibliográficas **sin** llenar los campos de texto solamente haciendo click en los botones de *Agregar Libro* o *Agregar Articulo*.
 
 Lo anterior es útil para tener una plantilla con las referencias bibliográficas.
+
+## Look and feel
+
+![Generador de referencias BibTeX en Java](./Imagenes/menu_look_and_feel_v1-4.png)
+
+En el menú de opciones se agrega un listado con los *Look and feel* (a veces conocidos como temas, aspectos, entre otros) proporcionados por la versión de Java del usuario, con la intención de mejorar la experiencia de uso.
+
+Un ejemplo es el Look and feel Windows:
+
+![Look and feel Windows](./Imagenes/Generador_referencias_BibTex_windows_v1-4.png)
+
+El `jfilechooser` de windows es el siguiente:
+
+![jfilechooser en Windows](./Imagenes/jfilechooser_windows_v1-4.png)
 
 ## Requerimientos
 
@@ -27,8 +41,6 @@ Al usar el `.jar` (un ejecutable de Java) si tienes el jdk instalado, estas en L
 - En todos los campos de texto se puede poner cualquier letra o número.
 
 - Al guardar el archivo la información del area de texto se elimina, se debe verificar que la información sea correcta al igual que el nombre de archivo.
-
-- Usa un tema llamado *nimbus* proporcionado por java por lo que si se usa una versión vieja de java tal vez no se vea el tema.
 
 - Es un programa *offline*, no usa internet.
 
