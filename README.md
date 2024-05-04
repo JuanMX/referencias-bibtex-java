@@ -8,11 +8,11 @@
 
 Genera referencias de libros y artículos. 
 
-Se pueden agregar las referencias bibliográficas **sin** llenar los campos de texto solamente haciendo click en los botones de *Agregar Libro* o *Agregar Articulo*.
+Se pueden agregar las referencias bibliográficas **sin** llenar los campos de texto, solamente haciendo click en los botones de *Agregar Libro* o *Agregar Articulo*.
 
 Lo anterior es útil para tener una plantilla con las referencias bibliográficas.
 
-## Look and feel
+## Cambiar el tema de la GUI (Look and feel)
 
 ![Generador de referencias BibTeX en Java](./Imagenes/menu_look_and_feel_v1-4.png)
 
@@ -22,9 +22,13 @@ Un ejemplo es el Look and feel Windows:
 
 ![Look and feel Windows](./Imagenes/Generador_referencias_BibTex_windows_v1-4.png)
 
-El `jfilechooser` de windows es el siguiente:
+El `jfilechooser` de Windows es el siguiente:
 
 ![jfilechooser en Windows](./Imagenes/jfilechooser_windows_v1-4.png)
+
+Por el momento el cambio de tema (look and feel) no se puede hacer en tiempo de ejecución mostrando el siguiente mensaje:
+
+![El tema no se puede poner en tiempo de ejecucion](./Imagenes/joptionpane_look_and_feel_tiempo_de_ejecucion_v1-4.png)
 
 ## Requerimientos
 
