@@ -2,9 +2,9 @@
 
 ![Generador de referencias BibTeX en Java](./Imagenes/Generador_referencias_BibTex_v1-4.png)
 
-![jfilechooser](./Imagenes/jfilechooser_v1-3.png)
+![jfilechooser](./Imagenes/jfilechooser_v1-4.png)
 
-![joptionpane](./Imagenes/joptionpane_v1-3.png)
+![joptionpane](./Imagenes/joptionpane_v1-4.png)
 
 Genera referencias de libros y artículos. 
 
