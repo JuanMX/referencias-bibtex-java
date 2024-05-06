@@ -35,6 +35,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+
 public class referenciasBibTex2 extends JFrame{
 	
 	private int largoTextI = 18, largoTextD = 19;
@@ -60,7 +63,7 @@ public class referenciasBibTex2 extends JFrame{
 	private String titleL, authorL, publisherL, yearL, etiquetaL;
 	private String titleA, authorA, journalA, yearA, numberA, pagesA, volumeA, publisherA, etiquetaA;
 	
-	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoInfo, iconoInformation, iconojuanmx;
+	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoFolder, iconoInformation, iconojuanmx;
 
 	private JMenuBar barMenu;
 	private JMenu menuAyuda;
@@ -80,7 +83,7 @@ public class referenciasBibTex2 extends JFrame{
 		
 		Toolkit toolkitIcono = Toolkit.getDefaultToolkit();
 		
-		iconoInfo = new ImageIcon(toolkitIcono.getImage("./img/document-open.png"));
+		iconoFolder = new ImageIcon(toolkitIcono.getImage("./img/document-open.png"));
 		iconojuanmx = new ImageIcon(toolkitIcono.getImage("./img/icon.png"));
 		iconoInformation = new ImageIcon(toolkitIcono.getImage("./img/dialog-information.png"));
 		
@@ -399,6 +402,10 @@ public class referenciasBibTex2 extends JFrame{
 				
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setDialogTitle("Especifica donde guardar");//titulo de ventana del JFileChooser
+
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss-a");  
+				Date date = new Date();
+				fileChooser.setSelectedFile(new File("referencias_"+formatter.format(date)+".bib"));
 				
 				/*Permite ver archivos con extencion especifica*/
 				//fileChooser.setFileFilter(new FileNameExtensionFilter("Archivo de texto (*.txt)", "txt"));
@@ -410,7 +417,7 @@ public class referenciasBibTex2 extends JFrame{
 				if (seleccion == JFileChooser.APPROVE_OPTION) {
 					File fileToSave = fileChooser.getSelectedFile();
 					File f;
-					String rutaAbsolutaArchivo = fileToSave.getAbsolutePath()  + ".bib";
+					String rutaAbsolutaArchivo = fileToSave.getAbsolutePath();
             		f = new File(rutaAbsolutaArchivo);
             		
             		try{
@@ -425,7 +432,7 @@ public class referenciasBibTex2 extends JFrame{
 						
 						referenciasText.setText("");//al final de que se guarda el archivo se vacia el contenido del area de texto
 
-						JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardado en:", JOptionPane.PLAIN_MESSAGE, iconoInfo );
+						JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardado en:", JOptionPane.PLAIN_MESSAGE, iconoFolder);
 					}catch(IOException e){};
             	
 				}
@@ -459,8 +466,6 @@ public class referenciasBibTex2 extends JFrame{
 								config.setConfig("lookAndFeel", lookAndFeelSelected);
 								
 								System.out.println("Look and feel - menu bar: " + lookAndFeelSelected);
-								
-								//JOptionPane.showMessageDialog( null, "El look and feel " + lookAndFeelSelected + " se mostrara la siguiente vez que inicie el programa", "El tema no se pudo poner en tiempo de ejecucion :(", JOptionPane.WARNING_MESSAGE );
 								
 								JOptionPane.showMessageDialog( null, "El look and feel " + lookAndFeelSelected + " se mostrara la siguiente vez que inicie el programa", "El tema no se pudo poner en tiempo de ejecucion :(", JOptionPane.PLAIN_MESSAGE, iconoInformation );
 								break;
