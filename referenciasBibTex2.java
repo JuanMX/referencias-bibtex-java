@@ -38,6 +38,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
 
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
 public class referenciasBibTex2 extends JFrame{
 	
 	private int largoTextI = 18, largoTextD = 19;
@@ -47,7 +50,8 @@ public class referenciasBibTex2 extends JFrame{
 	private Container contenedor;
 	
 	private GridLayout gridCampos, gridCamposD;
-	private GridBagLayout gridCentral;
+	//private GridBagLayout gridCentral;
+	private BorderLayout gridCentral;
 	private GridBagConstraints restricciones;
 
 	private JPanel p1, panelDerecha, panelCentral;
@@ -77,7 +81,7 @@ public class referenciasBibTex2 extends JFrame{
 	
 	Image ventanaIcono;
 	
-	public referenciasBibTex2(String configLookAndFeel){
+	public referenciasBibTex2(String configLookAndFeel, int altoPantalla, int anchoPantalla){
 	
 		super(tituloVentanaPrincipal);
 		
@@ -102,6 +106,7 @@ public class referenciasBibTex2 extends JFrame{
 		
 		iconoGuardar = new ImageIcon(toolkitIcono.getImage("./img/document-save-as.png"));
 		guardarB = new JButton ("Guardar en un archivo .bib", iconoGuardar);
+		guardarB.setBorder(new LineBorder(new Color(0,255,0), 1));
 		
 		//campos de texto y etiquetas para capturar datos de libros
 		etiquetaTextL = new JTextField( largoTextI );
@@ -140,31 +145,38 @@ public class referenciasBibTex2 extends JFrame{
 		publisherLabelA = new JLabel ("Publisher");
 		
 		//area de texto donde se agragan las referencias bibliograficas, esta deshabilitado editar su contenido con entrada de usuario
-		referenciasText = new JTextArea( 21, 41 );
+		referenciasText = new JTextArea( 21, 21 );
 		referenciasText.setEditable( false );
 		
 		//grid bag central para acomodar el area de texto y el boton de guardar archivo
-		gridCentral = new GridBagLayout();
+		//gridCentral = new GridBagLayout();
+		gridCentral = new BorderLayout(10,10);
 
         //3 paneles diferentes. En p1 se agregan los campos para capturar datos de libros, panelDerecha para articulos y panelCentral el area de texto y boton guardar
 		p1 = new JPanel();
         p1.setLayout(gridCampos);
+		p1.setBorder(new EmptyBorder(0, 10, 0, 50));
         
         panelDerecha = new JPanel();
         panelDerecha.setLayout(gridCamposD);
-        
+        panelDerecha.setBorder(new EmptyBorder(0, 50, 0, 10));
+
         panelCentral = new JPanel(); 
         panelCentral.setLayout(gridCentral);
+		panelCentral.setBorder(new EmptyBorder(10, 20, 10, 20));
+		panelCentral.add(new JScrollPane(referenciasText), BorderLayout.CENTER);
+		panelCentral.add(guardarB, BorderLayout.SOUTH);
+
+		/*
         restricciones = new GridBagConstraints();
 
 		restricciones.fill = GridBagConstraints.BOTH;
 		
-		agregarComponente( new JScrollPane(referenciasText), 0, 0, 10, 9 ); //con este metodo se agrega el area de texto con un scroll al panel
+		agregarComponente( new JScrollPane(referenciasText), 0, 0, 3, 2 ); //con este metodo se agrega el area de texto con un scroll al panel
 		
-		guardarB.setBackground(new Color( 177, 255, 255 )); //el cambio de color es para que se distinga este boton de los otros dos
         restricciones.fill = GridBagConstraints.CENTER;
-        agregarComponente( guardarB, 10, 5, 10, 1 ); //con este metodo se agrega el boton de guardar
-		
+        agregarComponente( guardarB, 2, 1, 3, 1 ); //con este metodo se agrega el boton de guardar
+		*/
 		/*Por si se requiere cambiar el color de los botones para agregar libros y articulos*/
 		//masLibroB.setBackground(new Color( 246, 182, 119 ));
 		//masArticuloB.setBackground(new Color( 246, 182, 119 ));
@@ -277,6 +289,7 @@ public class referenciasBibTex2 extends JFrame{
                 
 	}
 	//metodo para agregar componentes a un grid bag, se le pasa como parametro las restricciones de cada componente
+	/*
 	private void agregarComponente( Component componente, int fila, int columna, int anchura, int altura )
 	{
 		restricciones.gridx = columna; // establece gridx
@@ -286,7 +299,7 @@ public class referenciasBibTex2 extends JFrame{
 		gridCentral.setConstraints( componente, restricciones ); // establece restricciones
 		panelCentral.add( componente ); // agrega el componente
 	} 
-
+	*/
 	public static void main( String args[] )
 	{
 		String configLookAndFeel="";
@@ -318,7 +331,7 @@ public class referenciasBibTex2 extends JFrame{
 		Dimension tamanoPantalla = pantalla.getScreenSize();
 		int anchoPantalla = tamanoPantalla.width;
 		int altoPantalla = tamanoPantalla.height / 2;
-		referenciasBibTex2 sistema = new referenciasBibTex2(configLookAndFeel);
+		referenciasBibTex2 sistema = new referenciasBibTex2(configLookAndFeel, altoPantalla, anchoPantalla);
 		sistema.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		//sistema.setBackground(new Color(242,241,240));
 		sistema.setSize( anchoPantalla, altoPantalla );

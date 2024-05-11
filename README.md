@@ -32,11 +32,13 @@ Por el momento el cambio de tema (look and feel) no se puede hacer en tiempo de 
 
 ## Requerimientos
 
-Esta hecho en Java sin ninguna librería adicional **pero** se necesita jdk o jre para ejecutarlo. Se pueden encontrar aqui.
+Esta hecho en Java sin ninguna librería adicional **pero** se necesita Java jdk o jre para ejecutarlo. Se pueden encontrar aqui:
 
 https://www.oracle.com/java/technologies/downloads/#java8
 
 https://www.java.com/es/download/manual.jsp
+
+**Se sugiere usar jdk8 o jre8 para una mejor experiencia de uso.**
 
 Al usar el `.jar` (un ejecutable de Java) si tienes el jdk instalado, estas en Linux y no se ejecuta, prueba cambiando los permisos de ejecución con: click derecho -> propiedades.
 
@@ -58,6 +60,9 @@ Al usar el `.jar` (un ejecutable de Java) si tienes el jdk instalado, estas en L
 ![tango6](https://upload.wikimedia.org/wikipedia/commons/1/1b/X-office-document.svg)
 ![tango7](https://upload.wikimedia.org/wikipedia/commons/4/4f/Document-open.svg)
 ![tango8](https://upload.wikimedia.org/wikipedia/commons/2/2f/Document-save-as.svg)
+![tango9](https://upload.wikimedia.org/wikipedia/commons/archive/0/03/20110418173417%21Dialog-information.svg)
+![tango9](https://upload.wikimedia.org/wikipedia/commons/f/f9/Edit-find-replace.svg)
+
 
 
 
