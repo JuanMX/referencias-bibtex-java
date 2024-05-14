@@ -61,8 +61,8 @@ Al usar el `.jar` (un ejecutable de Java) si tienes el jdk instalado, estas en L
 ![tango7](https://upload.wikimedia.org/wikipedia/commons/4/4f/Document-open.svg)
 ![tango8](https://upload.wikimedia.org/wikipedia/commons/2/2f/Document-save-as.svg)
 ![tango9](https://upload.wikimedia.org/wikipedia/commons/archive/0/03/20110418173417%21Dialog-information.svg)
-![tango9](https://upload.wikimedia.org/wikipedia/commons/f/f9/Edit-find-replace.svg)
-
+![tango10](https://upload.wikimedia.org/wikipedia/commons/f/f9/Edit-find-replace.svg)
+![tango11](https://upload.wikimedia.org/wikipedia/commons/7/7f/Dialog-error.svg)
 
 
 

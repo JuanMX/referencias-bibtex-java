@@ -72,7 +72,7 @@ public class referenciasBibTex2 extends JFrame{
 	private JRadioButtonMenuItem lookAndFeels[];
 	private ButtonGroup lookAndFeelsButtonGroup;
 
-	private static final String tituloVentanaPrincipal = "Generador de referencias BibTeX v1.4";
+	private static final String tituloVentanaPrincipal = "Generador de referencias BibTeX v1.5";
 	
 	Image ventanaIcono;
 	static ArchivoDeConfiguracion config = new ArchivoDeConfiguracion();
