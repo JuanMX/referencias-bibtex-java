@@ -30,11 +30,6 @@ import javax.swing.JRadioButtonMenuItem;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 
-import java.util.Properties;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
 
@@ -67,7 +62,7 @@ public class referenciasBibTex2 extends JFrame{
 	private String titleL, authorL, publisherL, yearL, etiquetaL;
 	private String titleA, authorA, journalA, yearA, numberA, pagesA, volumeA, publisherA, etiquetaA;
 	
-	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoFolder, iconoInformation, iconojuanmx;
+	private Icon iconoGuardar, iconoLibro, iconoArticulo, iconoFolder, iconoInformation, iconojuanmx, iconoEncontradoEscribir, iconoError;
 
 	private JMenuBar barMenu;
 	private JMenu menuAyuda;
@@ -80,6 +75,7 @@ public class referenciasBibTex2 extends JFrame{
 	private static final String tituloVentanaPrincipal = "Generador de referencias BibTeX v1.4";
 	
 	Image ventanaIcono;
+	static ArchivoDeConfiguracion config = new ArchivoDeConfiguracion();
 	
 	public referenciasBibTex2(String configLookAndFeel, int altoPantalla, int anchoPantalla){
 	
@@ -90,6 +86,8 @@ public class referenciasBibTex2 extends JFrame{
 		iconoFolder = new ImageIcon(toolkitIcono.getImage("./img/document-open.png"));
 		iconojuanmx = new ImageIcon(toolkitIcono.getImage("./img/icon.png"));
 		iconoInformation = new ImageIcon(toolkitIcono.getImage("./img/dialog-information.png"));
+		iconoEncontradoEscribir = new ImageIcon(toolkitIcono.getImage("./img/edit-find-replace.png"));
+		iconoError = new ImageIcon(toolkitIcono.getImage("./img/dialog-error.png"));
 		
 		//cuadriculas (grid) de los campos de texto y etiquetas
 		gridCampos = new GridLayout(6, 2, 1, 1);
@@ -303,19 +301,21 @@ public class referenciasBibTex2 extends JFrame{
 	public static void main( String args[] )
 	{
 		String configLookAndFeel="";
-		
+		/*
 		Properties prop = new Properties();
 		String CONFIG_FILE = "CONFIG.config";
 		try {
 			prop.load(new FileInputStream(CONFIG_FILE));
+			System.out.println(prop);
 			configLookAndFeel = prop.getProperty("lookAndFeel");
 			
 		}catch(IOException e) {
-			JOptionPane.showMessageDialog( null, "Algo salio mal al leer el archivo de configuracion", "!", JOptionPane.ERROR_MESSAGE );
+			JOptionPane.showMessageDialog( null, "Hubo un problema al leer el archivo "+CONFIG_FILE, "No se pudo acceder a la configuracion", JOptionPane.ERROR_MESSAGE );
 			
 			e.printStackTrace();
 		}
-		
+		*/
+		configLookAndFeel = config.getConfig("lookAndFeel");
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if (configLookAndFeel.equals(info.getName())) {
@@ -412,42 +412,72 @@ public class referenciasBibTex2 extends JFrame{
             
             //este bloque es lo que hace si se presiona el boton que guarda en un archivo
             else if (evento.getSource() == guardarB){
-				
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.setDialogTitle("Especifica donde guardar");//titulo de ventana del JFileChooser
+
+				boolean mostrarFileChooser = true, escribirArchivo = false;
+				String ultimaRuta = config.getConfig("ultimaRuta");//System.getProperty("user.home");
+				if (ultimaRuta.length()==0) ultimaRuta = System.getProperty("user.home");
 
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss-a");  
 				Date date = new Date();
-				fileChooser.setSelectedFile(new File("referencias_"+formatter.format(date)+".bib"));
 				
-				/*Permite ver archivos con extencion especifica*/
-				//fileChooser.setFileFilter(new FileNameExtensionFilter("Archivo de texto (*.txt)", "txt"));
-				fileChooser.setFileFilter(new FileNameExtensionFilter("BibTeX (*.bib)","bib"));
-				
-				int seleccion = fileChooser.showSaveDialog(null);
-				 
-				/*Tal vez hay mas maneras de escribir archivos pero aqui se hace con un File, FileWriter, BufferedWriter y PrintWriter*/
-				if (seleccion == JFileChooser.APPROVE_OPTION) {
-					File fileToSave = fileChooser.getSelectedFile();
-					File f;
-					String rutaAbsolutaArchivo = fileToSave.getAbsolutePath();
-            		f = new File(rutaAbsolutaArchivo);
-            		
-            		try{
-						FileWriter w = new FileWriter(f/*,true*/);//si se descomenta el "true" lo que hace es: si ya existe un archivo y se quiere escribir en el, escribe al final del archivo.
-						BufferedWriter bw = new BufferedWriter(w);
-						PrintWriter wr = new PrintWriter(bw);  
-					
-						wr.append( referenciasText.getText() );
-						
-						wr.close();
-						bw.close();
-						
-						referenciasText.setText("");//al final de que se guarda el archivo se vacia el contenido del area de texto
+				while(mostrarFileChooser){
+					JFileChooser fileChooser = new JFileChooser(ultimaRuta);
+					fileChooser.setDialogTitle("Guardar en:");//titulo de ventana del JFileChooser
 
-						JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardado en:", JOptionPane.PLAIN_MESSAGE, iconoFolder);
-					}catch(IOException e){};
-            	
+					fileChooser.setSelectedFile(new File("referencias_"+formatter.format(date)+".bib"));
+					
+					/*Permite ver archivos con extencion especifica*/
+					//fileChooser.setFileFilter(new FileNameExtensionFilter("Archivo de texto (*.txt)", "txt"));
+					fileChooser.setFileFilter(new FileNameExtensionFilter("BibTeX (*.bib)","bib"));
+					
+					int seleccion = fileChooser.showSaveDialog(null);
+				 
+					/*Tal vez hay mas maneras de escribir archivos pero aqui se hace con un File, FileWriter, BufferedWriter y PrintWriter*/
+					if (seleccion == JFileChooser.APPROVE_OPTION) {
+						
+						File fileToSave = fileChooser.getSelectedFile();
+						ultimaRuta = fileToSave.getAbsoluteFile().getParent();
+						
+						if(fileToSave.exists()){
+							if (JOptionPane.showConfirmDialog(null, "El archivo ya existe.\nDesea sobreescribirlo?", "Confirmar el guardado", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, iconoEncontradoEscribir) == JOptionPane.YES_OPTION) {
+								escribirArchivo = true;
+							} 
+						}
+						else{
+							escribirArchivo = true;
+						}
+						if(escribirArchivo){
+							File f;
+							String rutaAbsolutaArchivo = fileToSave.getAbsolutePath();
+							f = new File(rutaAbsolutaArchivo);
+							
+							try{
+								FileWriter w = new FileWriter(f/*,true*/);//si se descomenta el "true" lo que hace es: si ya existe un archivo y se quiere escribir en el, escribe al final del archivo.
+								BufferedWriter bw = new BufferedWriter(w);
+								PrintWriter wr = new PrintWriter(bw);  
+							
+								wr.append( referenciasText.getText() );
+								
+								wr.close();
+								bw.close();
+								
+								referenciasText.setText("");//al final de que se guarda el archivo se vacia el contenido del area de texto
+
+								JOptionPane.showMessageDialog( null, rutaAbsolutaArchivo, "Guardado en:", JOptionPane.PLAIN_MESSAGE, iconoFolder);
+								
+								config.setConfig("ultimaRuta", ultimaRuta);
+								
+							}catch(IOException e){
+								JOptionPane.showMessageDialog( null, "No se pudo guardar el archivo", "Hubo un incidente:", JOptionPane.PLAIN_MESSAGE, iconoError);
+							}
+							finally {
+								mostrarFileChooser = false;
+							};
+						}
+					}
+					else{
+						mostrarFileChooser = false;
+					}
 				}
             }
 			else if (evento.getSource() == menuItemAcercaDe){
@@ -473,11 +503,7 @@ public class referenciasBibTex2 extends JFrame{
 							if (lookAndFeels[i].getText().equals(info.getName())) {
 								
 								lookAndFeelSelected = info.getName();
-								
-								ArchivoDeConfiguracion config = new ArchivoDeConfiguracion();
-								
 								config.setConfig("lookAndFeel", lookAndFeelSelected);
-								
 								System.out.println("Look and feel - menu bar: " + lookAndFeelSelected);
 								
 								JOptionPane.showMessageDialog( null, "El look and feel " + lookAndFeelSelected + " se mostrara la siguiente vez que inicie el programa", "El tema no se pudo poner en tiempo de ejecucion :(", JOptionPane.PLAIN_MESSAGE, iconoInformation );
@@ -491,46 +517,6 @@ public class referenciasBibTex2 extends JFrame{
 					}
 				}
 			}
-		}
-	}
-
-	private class ArchivoDeConfiguracion {
-	
-		private Properties prop = new Properties();
-		private final String CONFIG_FILE = "CONFIG.config";
-		
-		public void setConfig(String key, String value) {
-			
-			try{
-				
-				prop.setProperty(key, value);
-				prop.store(new FileOutputStream(CONFIG_FILE), null);
-				System.out.println("Set config " + key + " " + value + " " + CONFIG_FILE);
-				
-			}catch(IOException e){
-				JOptionPane.showMessageDialog( null, "Algo salio mal al guardar los cambios", "!", JOptionPane.ERROR_MESSAGE );
-				e.printStackTrace();
-			}
-			
-		}
-		
-		public String getConfig(String key) {
-			
-			String value = "";
-			
-			try {
-				prop.load(new FileInputStream(CONFIG_FILE));
-				value = prop.getProperty(key);
-				
-			}catch(IOException e) {
-				JOptionPane.showMessageDialog( null, "Algo salio mal al leer el archivo de configuracion", "!", JOptionPane.ERROR_MESSAGE );
-				
-				e.printStackTrace();
-			}finally {
-				System.out.println("Get config " + key + " " + value + " " + CONFIG_FILE);
-			}
-			
-			return value;
 		}
 	}
 }
