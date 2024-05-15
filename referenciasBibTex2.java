@@ -325,6 +325,7 @@ public class referenciasBibTex2 extends JFrame{
 			}
 		} 
 		catch (Exception e) {
+			JOptionPane.showMessageDialog( null, "No se pudo poner el look and feel: "+configLookAndFeel, "Hubo un incidente:", JOptionPane.PLAIN_MESSAGE);
 		}
 
 		Toolkit pantalla = Toolkit.getDefaultToolkit();

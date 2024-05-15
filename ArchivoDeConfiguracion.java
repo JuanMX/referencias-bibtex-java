@@ -2,7 +2,7 @@ import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.swing.JOptionPane; 
+import javax.swing.JOptionPane;
 
 public class ArchivoDeConfiguracion {	
     public static Properties prop = new Properties();
@@ -29,13 +29,14 @@ public class ArchivoDeConfiguracion {
         
         try {
             prop.load(new FileInputStream(CONFIG_FILE));
-            value = prop.getProperty(key);
+            value = prop.getProperty(key, "");
             
         }catch(IOException e) {
-            JOptionPane.showMessageDialog( null, "No se pudo leer: " + CONFIG_FILE + "\nEl programa intentara continuar sin este archivo", "Problema con el archivo de configuarcion", JOptionPane.PLAIN_MESSAGE );
-            
+            JOptionPane.showMessageDialog( null, "No se pudo leer: " + CONFIG_FILE + "\nEl programa intentara continuar con su flujo de trabajo", "Problema con el archivo de configuarcion", JOptionPane.PLAIN_MESSAGE);
             e.printStackTrace();
-        }finally {
+            value = "";
+        }
+        finally {
             System.out.println("Get config " + key + " " + value + " " + CONFIG_FILE);
         }
         
