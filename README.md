@@ -1,6 +1,6 @@
 # Generador de referencias BibTeX en Java
 
-![Generador de referencias BibTeX en Java](./Imagenes/Generador_referencias_BibTex_v1-4.png)
+![Generador de referencias BibTeX en Java](./Imagenes/Generador_referencias_BibTex_v1-5.png)
 
 ![jfilechooser](./Imagenes/jfilechooser_v1-4.png)
 
@@ -40,7 +40,9 @@ https://www.java.com/es/download/manual.jsp
 
 **Se sugiere usar jdk8 o jre8 para una mejor experiencia de uso.**
 
-Al usar el `.jar` (un ejecutable de Java) si tienes el jdk instalado, estas en Linux y no se ejecuta, prueba cambiando los permisos de ejecución con: click derecho -> propiedades.
+Al usar el `.jar` (un ejecutable de Java) si tienes el jdk instalado, estas en **Linux** y no se ejecuta, prueba cambiando los **permisos** de ejecución con: click derecho -> propiedades.
+
+![El tema no se puede poner en tiempo de ejecucion](./Imagenes/jar_ejecutable.png)
 
 ## Notas
 
