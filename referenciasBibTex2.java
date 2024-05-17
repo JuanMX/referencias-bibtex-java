@@ -83,11 +83,11 @@ public class referenciasBibTex2 extends JFrame{
 		
 		Toolkit toolkitIcono = Toolkit.getDefaultToolkit();
 		
-		iconoFolder = new ImageIcon(toolkitIcono.getImage("./img/document-open.png"));
+		iconoFolder = new ImageIcon(toolkitIcono.getImage("./img/Document-open.svg.png"));
 		iconojuanmx = new ImageIcon(toolkitIcono.getImage("./img/icon.png"));
-		iconoInformation = new ImageIcon(toolkitIcono.getImage("./img/dialog-information.png"));
-		iconoEncontradoEscribir = new ImageIcon(toolkitIcono.getImage("./img/edit-find-replace.png"));
-		iconoError = new ImageIcon(toolkitIcono.getImage("./img/dialog-error.png"));
+		iconoInformation = new ImageIcon(toolkitIcono.getImage("./img/Dialog-information_on.svg.png"));
+		iconoEncontradoEscribir = new ImageIcon(toolkitIcono.getImage("./img/Edit-find-replace.svg.png"));
+		iconoError = new ImageIcon(toolkitIcono.getImage("./img/Dialog-error.svg.png"));
 		
 		//cuadriculas (grid) de los campos de texto y etiquetas
 		gridCampos = new GridLayout(6, 2, 1, 1);
