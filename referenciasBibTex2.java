@@ -440,7 +440,7 @@ public class referenciasBibTex2 extends JFrame{
 						ultimaRuta = fileToSave.getAbsoluteFile().getParent();
 						
 						if(fileToSave.exists()){
-							if (JOptionPane.showConfirmDialog(null, "El archivo ya existe.\nDesea sobreescribirlo?", "Confirmar el guardado", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, iconoEncontradoEscribir) == JOptionPane.YES_OPTION) {
+							if (JOptionPane.showConfirmDialog(null, fileToSave.getName()+" ya existe.\n\nDesea sobreescribirlo?", "Confirmar el guardado", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, iconoEncontradoEscribir) == JOptionPane.YES_OPTION) {
 								escribirArchivo = true;
 							} 
 						}
